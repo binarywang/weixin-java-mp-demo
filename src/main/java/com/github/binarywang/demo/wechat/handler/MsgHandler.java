@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.github.binarywang.demo.wechat.builder.TextBuilder;
+import com.github.binarywang.demo.wechat.utils.JsonUtils;
 
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.exception.WxErrorException;
@@ -48,7 +49,8 @@ public class MsgHandler extends AbstractHandler {
         }
 
         //TODO 组装回复消息
-        String content = "回复信息内容";
+        String content = "收到信息内容：" + JsonUtils.toJson(wxMessage);
+
         return new TextBuilder().build(content, wxMessage, weixinService);
 
     }
