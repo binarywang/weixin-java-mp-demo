@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wechat-group/weixin-mp-demo-springboot.svg?branch=master)](https://travis-ci.org/wechat-group/weixin-mp-demo-springboot)
+
 #### 本Demo使用Spring Boot 框架实现微信公众号开发功能。
 
 ## 使用步骤：
