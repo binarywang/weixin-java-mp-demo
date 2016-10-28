@@ -1,9 +1,9 @@
 package com.github.binarywang.demo.wechat.builder;
 
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.WxMpXmlMessage;
-import me.chanjar.weixin.mp.bean.WxMpXmlOutImageMessage;
-import me.chanjar.weixin.mp.bean.WxMpXmlOutMessage;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlOutImageMessage;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 
 /**
  * 

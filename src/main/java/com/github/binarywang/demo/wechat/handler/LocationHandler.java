@@ -11,8 +11,8 @@ import com.github.binarywang.demo.wechat.builder.TextBuilder;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.WxMpXmlMessage;
-import me.chanjar.weixin.mp.bean.WxMpXmlOutMessage;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 
 /**
  * 
