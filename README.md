@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/wechat-group/weixin-mp-demo-springboot.svg?branch=master)](https://travis-ci.org/wechat-group/weixin-mp-demo-springboot)
 
-#### 本Demo使用Spring Boot 框架实现微信公众号开发功能。
+#### 本Demo基于Spring Boot构建，实现微信公众号开发功能。
 
 ## 使用步骤：
 1. 配置:复制/weixin-mp-demo-springboot/src/main/resources/application.properties.template 生成application.properties 文件，填写相关配置；	
