@@ -21,7 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.locales>zh_CN</project.build.locales>
 		<project.build.jdk>1.7</project.build.jdk>
-		<weixin-java-mp.version>2.2.6</weixin-java-mp.version>
+		<weixin-java-mp.version>2.3.0</weixin-java-mp.version>
 	</properties>
 
 	<dependencies>
