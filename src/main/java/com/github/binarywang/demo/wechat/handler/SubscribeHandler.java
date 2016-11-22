@@ -2,8 +2,6 @@ package com.github.binarywang.demo.wechat.handler;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.github.binarywang.demo.wechat.builder.TextBuilder;
@@ -19,7 +17,6 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
  * @author Binary Wang
  */
 @Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class SubscribeHandler extends AbstractHandler {
 
     @Override
