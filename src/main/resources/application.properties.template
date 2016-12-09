@@ -3,3 +3,4 @@ logging.level.com.github.binarywang.demo.wechat=DEBUG
 wechat.mp.appId=
 wechat.mp.secret=
 wechat.mp.token=
+wechat.mp.aesKey=
