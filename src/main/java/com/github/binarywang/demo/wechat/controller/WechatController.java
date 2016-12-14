@@ -31,8 +31,9 @@ public class WechatController {
     @Autowired
     private WxMpMessageRouter router;
 
+    @ResponseBody
     @GetMapping(produces = "text/plain;charset=utf-8")
-    public @ResponseBody String authGet(
+    public String authGet(
             @RequestParam(name = "signature",
                     required = false) String signature,
             @RequestParam(name = "timestamp",
@@ -54,8 +55,9 @@ public class WechatController {
         return "非法请求";
     }
 
+    @ResponseBody
     @PostMapping(produces = "application/xml; charset=UTF-8")
-    public @ResponseBody String post(@RequestBody String requestBody,
+    public String post(@RequestBody String requestBody,
             @RequestParam("signature") String signature,
             @RequestParam("timestamp") String timestamp,
             @RequestParam("nonce") String nonce,
