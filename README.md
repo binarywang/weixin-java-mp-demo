@@ -1,6 +1,6 @@
 #### 本Demo基于Spring Boot构建，实现微信公众号开发功能。
 
-[![Build Status](https://travis-ci.org/Wechat-Group/weixin-mp-demo-springboot.svg?branch=master)](https://travis-ci.org/Wechat-Group/weixin-mp-demo-springboot)
+[![Build Status](https://travis-ci.org/Wechat-Group/weixin-java-mp-demo-springboot.svg?branch=master)](https://travis-ci.org/Wechat-Group/weixin-java-mp-demo-springboot)
 -----------------------
 
 ## 使用步骤：
