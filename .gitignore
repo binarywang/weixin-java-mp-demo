@@ -3,3 +3,5 @@
 *.project
 *.classpath
 application.properties
+/.idea/
+*.iml
