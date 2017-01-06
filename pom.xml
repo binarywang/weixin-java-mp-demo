@@ -9,16 +9,16 @@
 		<version>1.4.1.RELEASE</version>
 	</parent>
 
-	<groupId>com.github.binarywang.wechat</groupId>
+	<groupId>com.github.binarywang</groupId>
 	<version>1.0.0-SNAPSHOT</version>
-	<artifactId>weixin-mp-demo-springboot</artifactId>
+	<artifactId>weixin-java-mp-demo-springboot</artifactId>
 	<packaging>jar</packaging>
 
 	<name>spring-boot-demo-for-wechat-mp</name>
 	<description>Spring Boot Demo with wechat MP</description>
 
 	<properties>
-		<weixin-java-mp.version>2.4.6.BETA</weixin-java-mp.version>
+		<weixin-java-mp.version>2.4.8.BETA</weixin-java-mp.version>
 
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
