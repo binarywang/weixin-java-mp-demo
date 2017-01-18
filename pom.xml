@@ -18,7 +18,7 @@
 	<description>Spring Boot Demo with wechat MP</description>
 
 	<properties>
-		<weixin-java-mp.version>2.4.8.BETA</weixin-java-mp.version>
+		<weixin-java-mp.version>2.4.9.BETA</weixin-java-mp.version>
 
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
@@ -47,6 +47,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
 		</dependency>
 	</dependencies>
 
