@@ -55,7 +55,6 @@ public class WechatController {
         return "非法请求";
     }
 
-    @ResponseBody
     @PostMapping(produces = "application/xml; charset=UTF-8")
     public String post(@RequestBody String requestBody,
             @RequestParam("signature") String signature,

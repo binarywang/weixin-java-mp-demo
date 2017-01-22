@@ -1,9 +1,9 @@
 package com.github.binarywang.demo.wechat.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,21 +32,31 @@ import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
  */
 @Configuration
 @ConditionalOnClass(WxMpService.class)
-@EnableConfigurationProperties(WechatMpProperties.class)
 public class WechatMpConfiguration {
-    @Autowired
-    private WechatMpProperties properties;
+
+    @Value("${wechat.mp.appId}")
+    private String appId;
+    @Value("${wechat.mp.secret}")
+    private String secret;
+    @Value("${wechat.mp.token}")
+    private String token;
+    @Value("${wechat.mp.aesKey}")
+    private String aesKey;
+    @Value("${wechat.mp.partnerId:}")
+    private String partnerId;
+    @Value("${wechat.mp.partnerKey:}")
+    private String partnerKey;
 
     @Bean
     @ConditionalOnMissingBean
     public WxMpConfigStorage configStorage() {
         WxMpInMemoryConfigStorage configStorage = new WxMpInMemoryConfigStorage();
-        configStorage.setAppId(this.properties.getAppId());
-        configStorage.setSecret(this.properties.getSecret());
-        configStorage.setToken(this.properties.getToken());
-        configStorage.setAesKey(this.properties.getAesKey());
-        configStorage.setPartnerId(this.properties.getPartnerId());
-        configStorage.setPartnerKey(this.properties.getPartnerKey());
+        configStorage.setAppId(appId);
+        configStorage.setSecret(secret);
+        configStorage.setToken(token);
+        configStorage.setAesKey(aesKey);
+        configStorage.setPartnerId(partnerId);
+        configStorage.setPartnerKey(partnerKey);
         return configStorage;
     }
 
@@ -58,7 +68,7 @@ public class WechatMpConfiguration {
         return wxMpService;
     }
 
-    @Bean 
+    @Bean
     public WxMpMessageRouter router(WxMpService wxMpService) {
         final WxMpMessageRouter newRouter = new WxMpMessageRouter(wxMpService);
 
@@ -75,7 +85,7 @@ public class WechatMpConfiguration {
         newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT)
             .event(WxConsts.EVT_KF_SWITCH_SESSION)
             .handler(this.kfSessionHandler).end();
-        
+
         // 门店审核事件
         newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT)
             .event(WxConsts.EVT_POI_CHECK_NOTIFY)
