@@ -9,19 +9,22 @@
 		<version>1.4.1.RELEASE</version>
 	</parent>
 
-	<groupId>com.github.binarywang.wechat</groupId>
+	<groupId>com.github.binarywang</groupId>
 	<version>1.0.0-SNAPSHOT</version>
-	<artifactId>weixin-mp-demo-springboot</artifactId>
+	<artifactId>weixin-java-mp-demo-springboot</artifactId>
 	<packaging>jar</packaging>
 
 	<name>spring-boot-demo-for-wechat-mp</name>
 	<description>Spring Boot Demo with wechat MP</description>
 
 	<properties>
+		<weixin-java-mp.version>2.6.2.BETA</weixin-java-mp.version>
+
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.locales>zh_CN</project.build.locales>
-		<project.build.jdk>1.7</project.build.jdk>
-		<weixin-java-mp.version>2.2.4</weixin-java-mp.version>
 	</properties>
 
 	<dependencies>
@@ -44,32 +47,14 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>${project.build.jdk}</source>
-					<target>${project.build.jdk}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<groups>com.testwithspring.starter.springboot.UnitTest</groups>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>

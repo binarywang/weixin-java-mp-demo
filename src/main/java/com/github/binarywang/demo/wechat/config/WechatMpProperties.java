@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * wechat mp properties
  *
- * @author Binary Wang
+ * @author Binary Wang(https://github.com/binarywang)
  */
 @ConfigurationProperties(prefix = "wechat.mp")
 public class WechatMpProperties {
@@ -20,16 +20,6 @@ public class WechatMpProperties {
      * 设置微信公众号的app secret
      */
     private String secret;
-
-    /**
-     * 微信支付partner id
-     */
-    private String partnerId;
-
-    /**
-     * 微信支付partner key
-     */
-    private String partnerKey;
 
     /**
      * 设置微信公众号的token
@@ -57,22 +47,6 @@ public class WechatMpProperties {
         this.secret = secret;
     }
 
-    public String getPartnerId() {
-        return this.partnerId;
-    }
-
-    public void setPartnerId(String partnerId) {
-        this.partnerId = partnerId;
-    }
-
-    public String getPartnerKey() {
-        return this.partnerKey;
-    }
-
-    public void setPartnerKey(String partnerKey) {
-        this.partnerKey = partnerKey;
-    }
-
     public String getToken() {
         return this.token;
     }
@@ -92,6 +66,6 @@ public class WechatMpProperties {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this,
-            ToStringStyle.MULTI_LINE_STYLE);
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

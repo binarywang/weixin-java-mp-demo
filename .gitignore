@@ -2,4 +2,6 @@
 /.settings/
 *.project
 *.classpath
-application.properties
+application.yml
+/.idea/
+*.iml
