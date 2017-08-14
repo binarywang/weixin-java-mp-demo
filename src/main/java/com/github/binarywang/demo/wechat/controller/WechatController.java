@@ -25,7 +25,7 @@ public class WechatController {
     private WxMpMessageRouter router;
 
     @GetMapping(produces = "text/plain;charset=utf-8")
-    public String authGet(
+    public String authGet(HttpServletResponse response,
             @RequestParam(name = "signature",
                     required = false) String signature,
             @RequestParam(name = "timestamp",
@@ -40,11 +40,13 @@ public class WechatController {
             throw new IllegalArgumentException("请求参数非法，请核实!");
         }
 
-        if (this.wxService.checkSignature(timestamp, nonce, signature)) {
-            return echostr;
+        try {
+            if (wxService.checkSignature(timestamp, nonce, signature)) {
+                response.getWriter().print(echostr);
+            }
+        } catch (IOException e) {
+           throw new IllegalArgumentException("非法请求，请核实!");
         }
-
-        return "非法请求";
     }
 
     @PostMapping(produces = "application/xml; charset=UTF-8")
