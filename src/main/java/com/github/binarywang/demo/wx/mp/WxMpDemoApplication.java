@@ -1,4 +1,4 @@
-package com.github.binarywang.demo.wechat;
+package com.github.binarywang.demo.wx.mp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
