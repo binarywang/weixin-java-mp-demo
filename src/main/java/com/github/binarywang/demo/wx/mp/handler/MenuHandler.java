@@ -16,21 +16,21 @@ import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 @Component
 public class MenuHandler extends AbstractHandler {
 
-  @Override
-  public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
-                                  Map<String, Object> context, WxMpService weixinService,
-                                  WxSessionManager sessionManager) {
+    @Override
+    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
+                                    Map<String, Object> context, WxMpService weixinService,
+                                    WxSessionManager sessionManager) {
 
-    String msg = String.format("type:%s, event:%s, key:%s",
-        wxMessage.getMsgType(), wxMessage.getEvent(),
-        wxMessage.getEventKey());
-    if (MenuButtonType.VIEW.equals(wxMessage.getEvent())) {
-      return null;
+        String msg = String.format("type:%s, event:%s, key:%s",
+            wxMessage.getMsgType(), wxMessage.getEvent(),
+            wxMessage.getEventKey());
+        if (MenuButtonType.VIEW.equals(wxMessage.getEvent())) {
+            return null;
+        }
+
+        return WxMpXmlOutMessage.TEXT().content(msg)
+            .fromUser(wxMessage.getToUser()).toUser(wxMessage.getFromUser())
+            .build();
     }
-
-    return WxMpXmlOutMessage.TEXT().content(msg)
-        .fromUser(wxMessage.getToUser()).toUser(wxMessage.getFromUser())
-        .build();
-  }
 
 }
