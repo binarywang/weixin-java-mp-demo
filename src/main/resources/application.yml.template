@@ -1,11 +1,15 @@
 logging:
   level:
-    org.springframework.web: DEBUG
+    org.springframework.web: INFO
     com.github.binarywang.demo.wx.mp: DEBUG
     me.chanjar.weixin: DEBUG
 wx:
   mp:
-    appId:
-    secret:
-    token:
-    aesKey:
+    - appId: 11
+      secret: 11
+      token: 11
+      aesKey: 11
+    - appId: 22
+      secret: 11
+      token: 11
+      aesKey: 11

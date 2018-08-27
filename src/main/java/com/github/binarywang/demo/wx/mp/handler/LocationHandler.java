@@ -33,10 +33,8 @@ public class LocationHandler extends AbstractHandler {
         }
 
         //上报地理位置事件
-        this.logger.info("\n上报地理位置 。。。 ");
-        this.logger.info("\n纬度 : " + wxMessage.getLatitude());
-        this.logger.info("\n经度 : " + wxMessage.getLongitude());
-        this.logger.info("\n精度 : " + String.valueOf(wxMessage.getPrecision()));
+        this.logger.info("上报地理位置，纬度 : {}，经度 : {}，精度 : {}",
+            wxMessage.getLatitude(), wxMessage.getLongitude(), String.valueOf(wxMessage.getPrecision()));
 
         //TODO  可以将用户地理位置信息保存到本地数据库，以便以后使用
 
