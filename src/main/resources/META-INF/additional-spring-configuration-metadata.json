@@ -3,7 +3,7 @@
         {
             "name": "wx.mp.configs",
             "type": "java.util.List",
-            "description": "Description for wx.mp.configs. https://github.com/ettingshausen/weixin-java-mp-demo-springboot/blob/master/README.md."
+            "description": "Description for wx.mp.configs."
         }
     ]
 }
