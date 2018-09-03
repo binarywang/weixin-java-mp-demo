@@ -1,5 +1,9 @@
 package com.github.binarywang.demo.wx.mp.handler;
 
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
 import com.github.binarywang.demo.wx.mp.builder.TextBuilder;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
@@ -7,9 +11,6 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
-import org.springframework.stereotype.Component;
-
-import java.util.Map;
 
 /**
  * @author Binary Wang(https://github.com/binarywang)
@@ -25,16 +26,22 @@ public class SubscribeHandler extends AbstractHandler {
         this.logger.info("新关注用户 OPENID: " + wxMessage.getFromUser());
 
         // 获取微信用户基本信息
-        WxMpUser userWxInfo = weixinService.getUserService()
-            .userInfo(wxMessage.getFromUser(), null);
-
-        if (userWxInfo != null) {
-            // TODO 可以添加关注用户到本地
+        try {
+            WxMpUser userWxInfo = weixinService.getUserService()
+                .userInfo(wxMessage.getFromUser(), null);
+            if (userWxInfo != null) {
+                // TODO 可以添加关注用户到本地数据库
+            }
+        } catch (WxErrorException e) {
+            if (e.getError().getErrorCode() == 48001) {
+                this.logger.info("该公众号没有获取用户信息权限！");
+            }
         }
+
 
         WxMpXmlOutMessage responseResult = null;
         try {
-            responseResult = handleSpecial(wxMessage);
+            responseResult = this.handleSpecial(wxMessage);
         } catch (Exception e) {
             this.logger.error(e.getMessage(), e);
         }
