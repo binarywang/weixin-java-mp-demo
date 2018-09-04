@@ -1,12 +1,20 @@
 package com.github.binarywang.demo.wx.mp.controller;
 
 import com.github.binarywang.demo.wx.mp.config.WxMpConfiguration;
+import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.bean.menu.WxMpGetSelfMenuInfoResult;
 import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 
@@ -33,7 +41,7 @@ public class WxMenuController {
     }
 
     @GetMapping("/create")
-    public String menuCreateSample(@PathVariable String appid) throws WxErrorException {
+    public String menuCreateSample(@PathVariable String appid) throws WxErrorException, MalformedURLException {
         WxMenu menu = new WxMenu();
         WxMenuButton button1 = new WxMenuButton();
         button1.setType(MenuButtonType.CLICK);
@@ -69,9 +77,26 @@ public class WxMenuController {
         button33.setName("赞一下我们");
         button33.setKey("V1001_GOOD");
 
+        WxMenuButton button34 = new WxMenuButton();
+        button34.setType(MenuButtonType.VIEW);
+        button34.setName("获取用户信息");
+
+        ServletRequestAttributes servletRequestAttributes =
+            (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (servletRequestAttributes != null) {
+            HttpServletRequest request = servletRequestAttributes.getRequest();
+            URL requestURL = new URL(request.getRequestURL().toString());
+            String url = WxMpConfiguration.getMpServices().get(appid)
+                .oauth2buildAuthorizationUrl(
+                    String.format("%s://%s/wx/redirect/%s/greet", requestURL.getProtocol(), requestURL.getHost(), appid),
+                    WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
+            button34.setUrl(url);
+        }
+
         button3.getSubButtons().add(button31);
         button3.getSubButtons().add(button32);
         button3.getSubButtons().add(button33);
+        button3.getSubButtons().add(button34);
 
         return WxMpConfiguration.getMpServices().get(appid).getMenuService().menuCreate(menu);
     }

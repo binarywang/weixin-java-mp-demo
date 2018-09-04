@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-grid.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-reboot.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+Hello, <span th:text="${user.nickname}"></span>!
+<br>
+<br>
+<br>
+<div class="card" style="width: 10rem;">
+    <img class="card-img-top" th:src="${user.headImgUrl}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${user.nickname}"></h5>
+        <p class="card-text"> 性别： <span th:text="${user.sexDesc}"></span></p>
+        <p class="card-text">城市： <span th:text="${user.city}"></span></p>
+    </div>
+</div>
+</body>
+</html>
