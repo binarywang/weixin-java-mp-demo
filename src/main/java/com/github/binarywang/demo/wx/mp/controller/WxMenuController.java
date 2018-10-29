@@ -1,5 +1,18 @@
 package com.github.binarywang.demo.wx.mp.controller;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import com.github.binarywang.demo.wx.mp.config.WxMpConfiguration;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
@@ -7,14 +20,6 @@ import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.bean.menu.WxMpGetSelfMenuInfoResult;
 import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 
@@ -112,8 +117,8 @@ public class WxMenuController {
      * @param json
      * @return 如果是个性化菜单，则返回menuid，否则返回null
      */
-    @GetMapping("/create/{json}")
-    public String menuCreate(@PathVariable String appid, @PathVariable String json) throws WxErrorException {
+    @PostMapping("/createByJson")
+    public String menuCreate(@PathVariable String appid, @RequestBody String json) throws WxErrorException {
         return WxMpConfiguration.getMpServices().get(appid).getMenuService().menuCreate(json);
     }
 
