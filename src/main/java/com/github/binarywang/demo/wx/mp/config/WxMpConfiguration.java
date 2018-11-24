@@ -1,19 +1,28 @@
 package com.github.binarywang.demo.wx.mp.config;
 
-import com.github.binarywang.demo.wx.mp.handler.*;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.github.binarywang.demo.wx.mp.handler.KfSessionHandler;
+import com.github.binarywang.demo.wx.mp.handler.LocationHandler;
+import com.github.binarywang.demo.wx.mp.handler.LogHandler;
+import com.github.binarywang.demo.wx.mp.handler.MenuHandler;
+import com.github.binarywang.demo.wx.mp.handler.MsgHandler;
+import com.github.binarywang.demo.wx.mp.handler.NullHandler;
+import com.github.binarywang.demo.wx.mp.handler.StoreCheckNotifyHandler;
+import com.github.binarywang.demo.wx.mp.handler.SubscribeHandler;
+import com.github.binarywang.demo.wx.mp.handler.UnsubscribeHandler;
 import com.google.common.collect.Maps;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.constant.WxMpEventConstants;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static me.chanjar.weixin.common.api.WxConsts.*;
 
@@ -67,6 +76,7 @@ public class WxMpConfiguration {
 
     @Bean
     public Object services() {
+        // 代码里getConfigs()处报错的同学，请注意仔细阅读项目说明，你的IDE需要引入lombok插件！！！！
         mpServices = this.properties.getConfigs()
             .stream()
             .map(a -> {
@@ -76,9 +86,6 @@ public class WxMpConfiguration {
                 configStorage.setToken(a.getToken());
                 configStorage.setAesKey(a.getAesKey());
 
-                // WxMpService wxMpService = new me.chanjar.weixin.mp.api.impl.WxMpServiceOkHttpImpl();
-                // WxMpService wxMpService = new me.chanjar.weixin.mp.api.impl.WxMpServiceJoddHttpImpl();
-                // WxMpService wxMpService = new me.chanjar.weixin.mp.api.impl.WxMpServiceHttpClientImpl();
                 WxMpService service = new WxMpServiceImpl();
                 service.setWxMpConfigStorage(configStorage);
                 routers.put(a.getAppId(), this.newRouter(service));
