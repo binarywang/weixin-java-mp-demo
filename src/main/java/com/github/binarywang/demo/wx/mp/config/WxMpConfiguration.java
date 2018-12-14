@@ -14,6 +14,7 @@ import com.github.binarywang.demo.wx.mp.handler.LogHandler;
 import com.github.binarywang.demo.wx.mp.handler.MenuHandler;
 import com.github.binarywang.demo.wx.mp.handler.MsgHandler;
 import com.github.binarywang.demo.wx.mp.handler.NullHandler;
+import com.github.binarywang.demo.wx.mp.handler.ScanHandler;
 import com.github.binarywang.demo.wx.mp.handler.StoreCheckNotifyHandler;
 import com.github.binarywang.demo.wx.mp.handler.SubscribeHandler;
 import com.github.binarywang.demo.wx.mp.handler.UnsubscribeHandler;
@@ -43,6 +44,7 @@ public class WxMpConfiguration {
     private MsgHandler msgHandler;
     private UnsubscribeHandler unsubscribeHandler;
     private SubscribeHandler subscribeHandler;
+    private ScanHandler scanHandler;
 
     private WxMpProperties properties;
 
@@ -53,7 +55,7 @@ public class WxMpConfiguration {
     public WxMpConfiguration(LogHandler logHandler, NullHandler nullHandler, KfSessionHandler kfSessionHandler,
                              StoreCheckNotifyHandler storeCheckNotifyHandler, LocationHandler locationHandler,
                              MenuHandler menuHandler, MsgHandler msgHandler, UnsubscribeHandler unsubscribeHandler,
-                             SubscribeHandler subscribeHandler, WxMpProperties properties) {
+                             SubscribeHandler subscribeHandler, ScanHandler scanHandler, WxMpProperties properties) {
         this.logHandler = logHandler;
         this.nullHandler = nullHandler;
         this.kfSessionHandler = kfSessionHandler;
@@ -63,6 +65,7 @@ public class WxMpConfiguration {
         this.msgHandler = msgHandler;
         this.unsubscribeHandler = unsubscribeHandler;
         this.subscribeHandler = subscribeHandler;
+        this.scanHandler = scanHandler;
         this.properties = properties;
     }
 
@@ -147,7 +150,7 @@ public class WxMpConfiguration {
 
         // 扫码事件
         newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-            .event(EventType.SCAN).handler(this.nullHandler).end();
+            .event(EventType.SCAN).handler(this.scanHandler).end();
 
         // 默认
         newRouter.rule().async(false).handler(this.msgHandler).end();
