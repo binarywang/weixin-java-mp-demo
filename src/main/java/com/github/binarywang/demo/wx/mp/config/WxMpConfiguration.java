@@ -1,5 +1,6 @@
 package com.github.binarywang.demo.wx.mp.config;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -80,20 +81,23 @@ public class WxMpConfiguration {
     @Bean
     public Object services() {
         // 代码里getConfigs()处报错的同学，请注意仔细阅读项目说明，你的IDE需要引入lombok插件！！！！
-        mpServices = this.properties.getConfigs()
-            .stream()
-            .map(a -> {
-                WxMpInMemoryConfigStorage configStorage = new WxMpInMemoryConfigStorage();
-                configStorage.setAppId(a.getAppId());
-                configStorage.setSecret(a.getSecret());
-                configStorage.setToken(a.getToken());
-                configStorage.setAesKey(a.getAesKey());
+        final List<WxMpProperties.MpConfig> configs = this.properties.getConfigs();
+        if (configs == null) {
+            throw new RuntimeException("大哥，拜托先看下项目首页的说明（readme文件），添加下相关配置，注意别配错了！");
+        }
 
-                WxMpService service = new WxMpServiceImpl();
-                service.setWxMpConfigStorage(configStorage);
-                routers.put(a.getAppId(), this.newRouter(service));
-                return service;
-            }).collect(Collectors.toMap(s -> s.getWxMpConfigStorage().getAppId(), a -> a));
+        mpServices = configs.stream().map(a -> {
+            WxMpInMemoryConfigStorage configStorage = new WxMpInMemoryConfigStorage();
+            configStorage.setAppId(a.getAppId());
+            configStorage.setSecret(a.getSecret());
+            configStorage.setToken(a.getToken());
+            configStorage.setAesKey(a.getAesKey());
+
+            WxMpService service = new WxMpServiceImpl();
+            service.setWxMpConfigStorage(configStorage);
+            routers.put(a.getAppId(), this.newRouter(service));
+            return service;
+        }).collect(Collectors.toMap(s -> s.getWxMpConfigStorage().getAppId(), a -> a, (o, n) -> o));
 
         return Boolean.TRUE;
     }
