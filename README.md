@@ -4,7 +4,7 @@
 -----------------------
 
 ### 本Demo基于Spring Boot构建，实现微信公众号后端开发功能。
-### 本项目为weixin-java-tools的Demo演示程序，更多Demo请[查阅此处](https://github.com/Wechat-Group/weixin-java-tools/blob/master/demo.md)。
+### 本项目为WxJava的Demo演示程序，更多Demo请[查阅此处](https://github.com/Wechat-Group/WxJava/blob/master/demo.md)。
 #### 如有问题请[【在此提问】](https://github.com/binarywang/weixin-java-mp-demo-springboot/issues)，谢谢配合。
 
 ## 使用步骤：
