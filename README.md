@@ -26,7 +26,6 @@ wx:
         aesKey: 111
 ```
 3. 运行Java程序：`WxMpDemoApplication`；
-4. （可选，如果自己有公网域名，可自行配置）打开shell或cmd，进入ngrok目录，运行 `ngrok -config ngrok.cfg -subdomain my-domain 8080` 如果运行失败，请更换my-domain为其它字符串，直至连接成功；
-5. 配置微信公众号中的接口地址：http://my-domain.tunnel.qydev.com/wx/portal/xxxxx （注意xxxxx为对应公众号的appid值，my-domain要跟上面的一致，需要符合微信官方的要求）；
-6. 根据自己需要修改各个handler的实现，加入自己的业务逻辑。
+4. 配置微信公众号中的接口地址：http://公网可访问域名/wx/portal/xxxxx （注意，xxxxx为对应公众号的appid值）；
+5. 根据自己需要修改各个handler的实现，加入自己的业务逻辑。
 	
