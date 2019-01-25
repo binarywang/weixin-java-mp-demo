@@ -3,10 +3,10 @@ package com.github.binarywang.demo.wx.mp.config;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.github.binarywang.demo.wx.mp.handler.KfSessionHandler;
@@ -78,9 +78,9 @@ public class WxMpConfiguration {
         return mpServices;
     }
 
-    @Bean
-    public Object services() {
-        // 代码里getConfigs()处报错的同学，请注意仔细阅读项目说明，你的IDE需要引入lombok插件！！！！
+    @PostConstruct
+    public void initServices() {
+        // 代码里 getConfigs()处报错的同学，请注意仔细阅读项目说明，你的IDE需要引入lombok插件！！！！
         final List<WxMpProperties.MpConfig> configs = this.properties.getConfigs();
         if (configs == null) {
             throw new RuntimeException("大哥，拜托先看下项目首页的说明（readme文件），添加下相关配置，注意别配错了！");
@@ -98,8 +98,6 @@ public class WxMpConfiguration {
             routers.put(a.getAppId(), this.newRouter(service));
             return service;
         }).collect(Collectors.toMap(s -> s.getWxMpConfigStorage().getAppId(), a -> a, (o, n) -> o));
-
-        return Boolean.TRUE;
     }
 
     private WxMpMessageRouter newRouter(WxMpService wxMpService) {
