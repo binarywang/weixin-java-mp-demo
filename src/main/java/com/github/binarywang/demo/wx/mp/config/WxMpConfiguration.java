@@ -1,30 +1,20 @@
 package com.github.binarywang.demo.wx.mp.config;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-
-import com.github.binarywang.demo.wx.mp.handler.KfSessionHandler;
-import com.github.binarywang.demo.wx.mp.handler.LocationHandler;
-import com.github.binarywang.demo.wx.mp.handler.LogHandler;
-import com.github.binarywang.demo.wx.mp.handler.MenuHandler;
-import com.github.binarywang.demo.wx.mp.handler.MsgHandler;
-import com.github.binarywang.demo.wx.mp.handler.NullHandler;
-import com.github.binarywang.demo.wx.mp.handler.ScanHandler;
-import com.github.binarywang.demo.wx.mp.handler.StoreCheckNotifyHandler;
-import com.github.binarywang.demo.wx.mp.handler.SubscribeHandler;
-import com.github.binarywang.demo.wx.mp.handler.UnsubscribeHandler;
+import com.github.binarywang.demo.wx.mp.handler.*;
 import com.google.common.collect.Maps;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.constant.WxMpEventConstants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static me.chanjar.weixin.common.api.WxConsts.*;
 
@@ -70,37 +60,29 @@ public class WxMpConfiguration {
         this.properties = properties;
     }
 
-    public static Map<String, WxMpMessageRouter> getRouters() {
-        return routers;
-    }
-
-    public static Map<String, WxMpService> getMpServices() {
-        return mpServices;
-    }
-
-    @PostConstruct
-    public void initServices() {
+    @Bean
+    public WxMpService wxMpService() {
         // 代码里 getConfigs()处报错的同学，请注意仔细阅读项目说明，你的IDE需要引入lombok插件！！！！
         final List<WxMpProperties.MpConfig> configs = this.properties.getConfigs();
         if (configs == null) {
             throw new RuntimeException("大哥，拜托先看下项目首页的说明（readme文件），添加下相关配置，注意别配错了！");
         }
 
-        mpServices = configs.stream().map(a -> {
-            WxMpInMemoryConfigStorage configStorage = new WxMpInMemoryConfigStorage();
-            configStorage.setAppId(a.getAppId());
-            configStorage.setSecret(a.getSecret());
-            configStorage.setToken(a.getToken());
-            configStorage.setAesKey(a.getAesKey());
-
-            WxMpService service = new WxMpServiceImpl();
-            service.setWxMpConfigStorage(configStorage);
-            routers.put(a.getAppId(), this.newRouter(service));
-            return service;
-        }).collect(Collectors.toMap(s -> s.getWxMpConfigStorage().getAppId(), a -> a, (o, n) -> o));
+        WxMpService service = new WxMpServiceImpl();
+        service.setMultiConfigStorages(configs
+            .stream().map(a -> {
+                WxMpInMemoryConfigStorage configStorage = new WxMpInMemoryConfigStorage();
+                configStorage.setAppId(a.getAppId());
+                configStorage.setSecret(a.getSecret());
+                configStorage.setToken(a.getToken());
+                configStorage.setAesKey(a.getAesKey());
+                return configStorage;
+            }).collect(Collectors.toMap(WxMpInMemoryConfigStorage::getAppId, a -> a, (o, n) -> o)));
+        return service;
     }
 
-    private WxMpMessageRouter newRouter(WxMpService wxMpService) {
+    @Bean
+    public WxMpMessageRouter messageRouter(WxMpService wxMpService) {
         final WxMpMessageRouter newRouter = new WxMpMessageRouter(wxMpService);
 
         // 记录所有事件的日志 （异步执行）

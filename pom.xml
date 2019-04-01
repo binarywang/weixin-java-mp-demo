@@ -18,7 +18,7 @@
     <description>Spring Boot Demo with wechat MP</description>
 
     <properties>
-        <weixin-java-mp.version>3.3.0</weixin-java-mp.version>
+        <weixin-java-mp.version>3.3.7.B</weixin-java-mp.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>

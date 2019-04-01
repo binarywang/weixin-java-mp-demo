@@ -5,3 +5,4 @@
 application.yml
 /.idea/
 *.iml
+/ngrok/

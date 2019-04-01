@@ -1,25 +1,20 @@
 package com.github.binarywang.demo.wx.mp.controller;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import com.github.binarywang.demo.wx.mp.config.WxMpConfiguration;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.menu.WxMpGetSelfMenuInfoResult;
 import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 
@@ -29,6 +24,12 @@ import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 @RestController
 @RequestMapping("/wx/menu/{appid}")
 public class WxMenuController {
+    private WxMpService wxService;
+
+    @Autowired
+    public WxMenuController(WxMpService wxService) {
+        this.wxService = wxService;
+    }
 
     /**
      * <pre>
@@ -42,7 +43,7 @@ public class WxMenuController {
      */
     @PostMapping("/create")
     public String menuCreate(@PathVariable String appid, @RequestBody WxMenu menu) throws WxErrorException {
-        return WxMpConfiguration.getMpServices().get(appid).getMenuService().menuCreate(menu);
+        return this.wxService.switchover1(appid).getMenuService().menuCreate(menu);
     }
 
     @GetMapping("/create")
@@ -91,10 +92,9 @@ public class WxMenuController {
         if (servletRequestAttributes != null) {
             HttpServletRequest request = servletRequestAttributes.getRequest();
             URL requestURL = new URL(request.getRequestURL().toString());
-            String url = WxMpConfiguration.getMpServices().get(appid)
-                .oauth2buildAuthorizationUrl(
-                    String.format("%s://%s/wx/redirect/%s/greet", requestURL.getProtocol(), requestURL.getHost(), appid),
-                    WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
+            String url = this.wxService.switchover1(appid).oauth2buildAuthorizationUrl(
+                String.format("%s://%s/wx/redirect/%s/greet", requestURL.getProtocol(), requestURL.getHost(), appid),
+                WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
             button34.setUrl(url);
         }
 
@@ -103,7 +103,8 @@ public class WxMenuController {
         button3.getSubButtons().add(button33);
         button3.getSubButtons().add(button34);
 
-        return WxMpConfiguration.getMpServices().get(appid).getMenuService().menuCreate(menu);
+        this.wxService.switchover(appid);
+        return this.wxService.getMenuService().menuCreate(menu);
     }
 
     /**
@@ -114,12 +115,11 @@ public class WxMenuController {
      * 详情请见：https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1455782296&token=&lang=zh_CN
      * </pre>
      *
-     * @param json
      * @return 如果是个性化菜单，则返回menuid，否则返回null
      */
     @PostMapping("/createByJson")
     public String menuCreate(@PathVariable String appid, @RequestBody String json) throws WxErrorException {
-        return WxMpConfiguration.getMpServices().get(appid).getMenuService().menuCreate(json);
+        return this.wxService.switchover1(appid).getMenuService().menuCreate(json);
     }
 
     /**
@@ -130,7 +130,7 @@ public class WxMenuController {
      */
     @GetMapping("/delete")
     public void menuDelete(@PathVariable String appid) throws WxErrorException {
-        WxMpConfiguration.getMpServices().get(appid).getMenuService().menuDelete();
+        this.wxService.switchover1(appid).getMenuService().menuDelete();
     }
 
     /**
@@ -143,7 +143,7 @@ public class WxMenuController {
      */
     @GetMapping("/delete/{menuId}")
     public void menuDelete(@PathVariable String appid, @PathVariable String menuId) throws WxErrorException {
-        WxMpConfiguration.getMpServices().get(appid).getMenuService().menuDelete(menuId);
+        this.wxService.switchover1(appid).getMenuService().menuDelete(menuId);
     }
 
     /**
@@ -154,7 +154,7 @@ public class WxMenuController {
      */
     @GetMapping("/get")
     public WxMpMenu menuGet(@PathVariable String appid) throws WxErrorException {
-        return WxMpConfiguration.getMpServices().get(appid).getMenuService().menuGet();
+        return this.wxService.switchover1(appid).getMenuService().menuGet();
     }
 
     /**
@@ -167,7 +167,7 @@ public class WxMenuController {
      */
     @GetMapping("/menuTryMatch/{userid}")
     public WxMenu menuTryMatch(@PathVariable String appid, @PathVariable String userid) throws WxErrorException {
-        return WxMpConfiguration.getMpServices().get(appid).getMenuService().menuTryMatch(userid);
+        return this.wxService.switchover1(appid).getMenuService().menuTryMatch(userid);
     }
 
     /**
@@ -187,6 +187,6 @@ public class WxMenuController {
      */
     @GetMapping("/getSelfMenuInfo")
     public WxMpGetSelfMenuInfoResult getSelfMenuInfo(@PathVariable String appid) throws WxErrorException {
-        return WxMpConfiguration.getMpServices().get(appid).getMenuService().getSelfMenuInfo();
+        return this.wxService.switchover1(appid).getMenuService().getSelfMenuInfo();
     }
 }
