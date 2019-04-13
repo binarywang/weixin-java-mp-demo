@@ -14,11 +14,11 @@
     <artifactId>weixin-java-mp-demo-springboot</artifactId>
     <packaging>jar</packaging>
 
-    <name>spring-boot-demo-for-wechat-mp</name>
-    <description>Spring Boot Demo with wechat MP</description>
+    <name>Wechat mp demo with Spring Boot and WxJava </name>
+    <description>基于 WxJava 和 Spring Boot 实现的微信公众号后端开发演示项目</description>
 
     <properties>
-        <weixin-java-mp.version>3.3.7.B</weixin-java-mp.version>
+        <weixin-java-mp.version>3.3.8.B</weixin-java-mp.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
