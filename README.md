@@ -7,6 +7,33 @@
 ### 本项目为WxJava的Demo演示程序，更多Demo请[查阅此处](https://github.com/Wechat-Group/WxJava/blob/master/demo.md)。
 #### 如有问题请[【在此提问】](https://github.com/binarywang/weixin-java-mp-demo-springboot/issues)，谢谢配合。
 
+<table border="0">
+	<tbody>
+		<tr>
+			<td align="left" valign="middle">
+        <a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzI3MzAwMzk4OA==&hid=1&sn=f31af3bf562b116b061c9ab4edf70b61&scene=18#wechat_redirect" target="_blank">
+				  <img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/qrcodes/mp.png">
+        </a>
+			</td>
+			<td align="center" valign="middle">
+				<a href="https://cloud.tencent.com/redirect.php?redirect=1014&cps_key=a4c06ffe004dbcda44036daa1bf8f876&from=console" target="_blank">
+					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/banners/tcloud.jpg">
+				</a>
+			</td>
+			<td align="right" valign="middle">
+				<a href="https://coding.net/?utm_source=WxJava" target="_blank">
+					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/banners/coding.jpg">
+				</a>
+			</td>
+			<td align="center" valign="middle">
+				<a href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=7makzf5h" target="_blank">
+					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/banners/aliyun.jpg">
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
 ## 使用步骤：
 1. 请注意，本demo为简化代码编译时加入了lombok支持，如果不了解lombok的话，请先学习下相关知识，比如可以阅读[此文章](https://mp.weixin.qq.com/s/cUc-bUcprycADfNepnSwZQ)；
 1. 另外，新手遇到问题，请务必先阅读[【开发文档首页】](https://github.com/Wechat-Group/WxJava/wiki)的常见问题部分，可以少走很多弯路，节省不少时间。
