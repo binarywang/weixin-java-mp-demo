@@ -43,7 +43,7 @@ public class WxMenuController {
      */
     @PostMapping("/create")
     public String menuCreate(@PathVariable String appid, @RequestBody WxMenu menu) throws WxErrorException {
-        return this.wxService.switchover1(appid).getMenuService().menuCreate(menu);
+        return this.wxService.switchoverTo(appid).getMenuService().menuCreate(menu);
     }
 
     @GetMapping("/create")
@@ -92,7 +92,7 @@ public class WxMenuController {
         if (servletRequestAttributes != null) {
             HttpServletRequest request = servletRequestAttributes.getRequest();
             URL requestURL = new URL(request.getRequestURL().toString());
-            String url = this.wxService.switchover1(appid).oauth2buildAuthorizationUrl(
+            String url = this.wxService.switchoverTo(appid).oauth2buildAuthorizationUrl(
                 String.format("%s://%s/wx/redirect/%s/greet", requestURL.getProtocol(), requestURL.getHost(), appid),
                 WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
             button34.setUrl(url);
@@ -119,7 +119,7 @@ public class WxMenuController {
      */
     @PostMapping("/createByJson")
     public String menuCreate(@PathVariable String appid, @RequestBody String json) throws WxErrorException {
-        return this.wxService.switchover1(appid).getMenuService().menuCreate(json);
+        return this.wxService.switchoverTo(appid).getMenuService().menuCreate(json);
     }
 
     /**
@@ -130,7 +130,7 @@ public class WxMenuController {
      */
     @GetMapping("/delete")
     public void menuDelete(@PathVariable String appid) throws WxErrorException {
-        this.wxService.switchover1(appid).getMenuService().menuDelete();
+        this.wxService.switchoverTo(appid).getMenuService().menuDelete();
     }
 
     /**
@@ -143,7 +143,7 @@ public class WxMenuController {
      */
     @GetMapping("/delete/{menuId}")
     public void menuDelete(@PathVariable String appid, @PathVariable String menuId) throws WxErrorException {
-        this.wxService.switchover1(appid).getMenuService().menuDelete(menuId);
+        this.wxService.switchoverTo(appid).getMenuService().menuDelete(menuId);
     }
 
     /**
@@ -154,7 +154,7 @@ public class WxMenuController {
      */
     @GetMapping("/get")
     public WxMpMenu menuGet(@PathVariable String appid) throws WxErrorException {
-        return this.wxService.switchover1(appid).getMenuService().menuGet();
+        return this.wxService.switchoverTo(appid).getMenuService().menuGet();
     }
 
     /**
@@ -167,7 +167,7 @@ public class WxMenuController {
      */
     @GetMapping("/menuTryMatch/{userid}")
     public WxMenu menuTryMatch(@PathVariable String appid, @PathVariable String userid) throws WxErrorException {
-        return this.wxService.switchover1(appid).getMenuService().menuTryMatch(userid);
+        return this.wxService.switchoverTo(appid).getMenuService().menuTryMatch(userid);
     }
 
     /**
@@ -187,6 +187,6 @@ public class WxMenuController {
      */
     @GetMapping("/getSelfMenuInfo")
     public WxMpGetSelfMenuInfoResult getSelfMenuInfo(@PathVariable String appid) throws WxErrorException {
-        return this.wxService.switchover1(appid).getMenuService().getSelfMenuInfo();
+        return this.wxService.switchoverTo(appid).getMenuService().getSelfMenuInfo();
     }
 }

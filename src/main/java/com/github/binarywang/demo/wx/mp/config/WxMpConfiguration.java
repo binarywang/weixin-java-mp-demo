@@ -2,6 +2,7 @@ package com.github.binarywang.demo.wx.mp.config;
 
 import com.github.binarywang.demo.wx.mp.handler.*;
 import com.google.common.collect.Maps;
+import lombok.AllArgsConstructor;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -23,42 +24,21 @@ import static me.chanjar.weixin.common.api.WxConsts.*;
  *
  * @author Binary Wang(https://github.com/binarywang)
  */
+@AllArgsConstructor
 @Configuration
 @EnableConfigurationProperties(WxMpProperties.class)
 public class WxMpConfiguration {
-    private LogHandler logHandler;
-    private NullHandler nullHandler;
-    private KfSessionHandler kfSessionHandler;
-    private StoreCheckNotifyHandler storeCheckNotifyHandler;
-    private LocationHandler locationHandler;
-    private MenuHandler menuHandler;
-    private MsgHandler msgHandler;
-    private UnsubscribeHandler unsubscribeHandler;
-    private SubscribeHandler subscribeHandler;
-    private ScanHandler scanHandler;
-
-    private WxMpProperties properties;
-
-    private static Map<String, WxMpMessageRouter> routers = Maps.newHashMap();
-    private static Map<String, WxMpService> mpServices = Maps.newHashMap();
-
-    @Autowired
-    public WxMpConfiguration(LogHandler logHandler, NullHandler nullHandler, KfSessionHandler kfSessionHandler,
-                             StoreCheckNotifyHandler storeCheckNotifyHandler, LocationHandler locationHandler,
-                             MenuHandler menuHandler, MsgHandler msgHandler, UnsubscribeHandler unsubscribeHandler,
-                             SubscribeHandler subscribeHandler, ScanHandler scanHandler, WxMpProperties properties) {
-        this.logHandler = logHandler;
-        this.nullHandler = nullHandler;
-        this.kfSessionHandler = kfSessionHandler;
-        this.storeCheckNotifyHandler = storeCheckNotifyHandler;
-        this.locationHandler = locationHandler;
-        this.menuHandler = menuHandler;
-        this.msgHandler = msgHandler;
-        this.unsubscribeHandler = unsubscribeHandler;
-        this.subscribeHandler = subscribeHandler;
-        this.scanHandler = scanHandler;
-        this.properties = properties;
-    }
+    private final LogHandler logHandler;
+    private final NullHandler nullHandler;
+    private final KfSessionHandler kfSessionHandler;
+    private final StoreCheckNotifyHandler storeCheckNotifyHandler;
+    private final LocationHandler locationHandler;
+    private final MenuHandler menuHandler;
+    private final MsgHandler msgHandler;
+    private final UnsubscribeHandler unsubscribeHandler;
+    private final SubscribeHandler subscribeHandler;
+    private final ScanHandler scanHandler;
+    private final WxMpProperties properties;
 
     @Bean
     public WxMpService wxMpService() {
