@@ -1,6 +1,7 @@
 package com.github.binarywang.demo.wx.mp.controller;
 
 import com.github.binarywang.demo.wx.mp.config.WxMpConfiguration;
+import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
@@ -17,15 +18,11 @@ import javax.xml.ws.Action;
 /**
  * @author Edward
  */
+@AllArgsConstructor
 @Controller
 @RequestMapping("/wx/redirect/{appid}")
 public class WxRedirectController {
-    private WxMpService wxService;
-
-    @Autowired
-    public WxRedirectController(WxMpService wxService) {
-        this.wxService = wxService;
-    }
+    private final WxMpService wxService;
 
     @RequestMapping("/greet")
     public String greetUser(@PathVariable String appid, @RequestParam String code, ModelMap map) {

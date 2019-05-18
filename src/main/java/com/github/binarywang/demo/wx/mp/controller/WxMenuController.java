@@ -1,5 +1,6 @@
 package com.github.binarywang.demo.wx.mp.controller;
 
+import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
@@ -7,7 +8,6 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.menu.WxMpGetSelfMenuInfoResult;
 import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -21,15 +21,11 @@ import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 /**
  * @author Binary Wang(https://github.com/binarywang)
  */
+@AllArgsConstructor
 @RestController
 @RequestMapping("/wx/menu/{appid}")
 public class WxMenuController {
-    private WxMpService wxService;
-
-    @Autowired
-    public WxMenuController(WxMpService wxService) {
-        this.wxService = wxService;
-    }
+    private final WxMpService wxService;
 
     /**
      * <pre>
