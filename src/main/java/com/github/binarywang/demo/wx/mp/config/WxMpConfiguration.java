@@ -2,11 +2,10 @@ package com.github.binarywang.demo.wx.mp.config;
 
 import com.github.binarywang.demo.wx.mp.handler.*;
 import lombok.AllArgsConstructor;
-import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
-import me.chanjar.weixin.mp.constant.WxMpEventConstants;
+import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,13 +55,13 @@ public class WxMpConfiguration {
         WxMpService service = new WxMpServiceImpl();
         service.setMultiConfigStorages(configs
             .stream().map(a -> {
-                WxMpInMemoryConfigStorage configStorage = new WxMpInMemoryConfigStorage();
+                WxMpDefaultConfigImpl configStorage = new WxMpDefaultConfigImpl();
                 configStorage.setAppId(a.getAppId());
                 configStorage.setSecret(a.getSecret());
                 configStorage.setToken(a.getToken());
                 configStorage.setAesKey(a.getAesKey());
                 return configStorage;
-            }).collect(Collectors.toMap(WxMpInMemoryConfigStorage::getAppId, a -> a, (o, n) -> o)));
+            }).collect(Collectors.toMap(WxMpDefaultConfigImpl::getAppId, a -> a, (o, n) -> o)));
         return service;
     }
 

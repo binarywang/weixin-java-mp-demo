@@ -18,7 +18,7 @@
     <description>基于 WxJava 和 Spring Boot 实现的微信公众号后端开发演示项目</description>
 
     <properties>
-        <weixin-java-mp.version>3.4.0</weixin-java-mp.version>
+        <weixin-java-mp.version>3.5.0</weixin-java-mp.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
