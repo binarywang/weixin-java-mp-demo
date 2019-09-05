@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 import static me.chanjar.weixin.common.api.WxConsts.EventType;
 import static me.chanjar.weixin.common.api.WxConsts.EventType.SUBSCRIBE;
 import static me.chanjar.weixin.common.api.WxConsts.EventType.UNSUBSCRIBE;
-import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType.CLICK;
-import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType.VIEW;
 import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
 import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType.EVENT;
 import static me.chanjar.weixin.mp.constant.WxMpEventConstants.CustomerService.*;
@@ -84,10 +82,10 @@ public class WxMpConfiguration {
         newRouter.rule().async(false).msgType(EVENT).event(POI_CHECK_NOTIFY).handler(this.storeCheckNotifyHandler).end();
 
         // 自定义菜单事件
-        newRouter.rule().async(false).msgType(EVENT).event(CLICK).handler(this.menuHandler).end();
+        newRouter.rule().async(false).msgType(EVENT).event(EventType.CLICK).handler(this.menuHandler).end();
 
         // 点击菜单连接事件
-        newRouter.rule().async(false).msgType(EVENT).event(VIEW).handler(this.nullHandler).end();
+        newRouter.rule().async(false).msgType(EVENT).event(EventType.VIEW).handler(this.nullHandler).end();
 
         // 关注事件
         newRouter.rule().async(false).msgType(EVENT).event(SUBSCRIBE).handler(this.subscribeHandler).end();
