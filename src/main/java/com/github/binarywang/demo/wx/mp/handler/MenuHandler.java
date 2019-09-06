@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
+import static me.chanjar.weixin.common.api.WxConsts.EventType;
 
 /**
  * @author Binary Wang(https://github.com/binarywang)
@@ -20,11 +20,10 @@ public class MenuHandler extends AbstractHandler {
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
                                     Map<String, Object> context, WxMpService weixinService,
                                     WxSessionManager sessionManager) {
-
         String msg = String.format("type:%s, event:%s, key:%s",
             wxMessage.getMsgType(), wxMessage.getEvent(),
             wxMessage.getEventKey());
-        if (MenuButtonType.VIEW.equals(wxMessage.getEvent())) {
+        if (EventType.VIEW.equals(wxMessage.getEvent())) {
             return null;
         }
 
