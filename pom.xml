@@ -14,7 +14,7 @@
     <artifactId>weixin-java-mp-demo-springboot</artifactId>
     <packaging>jar</packaging>
 
-    <name>Wechat mp demo with Spring Boot and WxJava </name>
+    <name>Wechat mp demo with Spring Boot and WxJava</name>
     <description>基于 WxJava 和 Spring Boot 实现的微信公众号后端开发演示项目</description>
 
     <properties>
@@ -73,6 +73,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.1.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
