@@ -21,11 +21,6 @@
 					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/images/banners/tcloud.jpg">
 				</a>
 			</td>
-			<td align="right" valign="middle">
-				<a href="https://mp.weixin.qq.com/s/R30CNEpkELJg4SRkX0mTDA" target="_blank">
-					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/images/banners/planB.jpg">
-				</a>
-			</td>
 			<td align="center" valign="middle">
 				<a href="https://www.vultr.com/?ref=7888900-4F" target="_blank">
 					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/images/banners/vultr.jpg">
