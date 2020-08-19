@@ -18,7 +18,7 @@
     <description>基于 WxJava 和 Spring Boot 实现的微信公众号后端开发演示项目</description>
 
     <properties>
-        <weixin-java-mp.version>3.8.0</weixin-java-mp.version>
+        <weixin-java-mp.version>3.8.9.B</weixin-java-mp.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -66,9 +66,14 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
+            <version>3.3.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.jedis-lock</groupId>
+            <artifactId>jedis-lock</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>

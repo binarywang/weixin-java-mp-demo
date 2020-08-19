@@ -2,13 +2,16 @@ package com.github.binarywang.demo.wx.mp.config;
 
 import com.github.binarywang.demo.wx.mp.handler.*;
 import lombok.AllArgsConstructor;
+import me.chanjar.weixin.common.redis.JedisWxRedisOps;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
+import me.chanjar.weixin.mp.config.impl.WxMpRedisConfigImpl;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import redis.clients.jedis.JedisPool;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,7 +56,9 @@ public class WxMpConfiguration {
         WxMpService service = new WxMpServiceImpl();
         service.setMultiConfigStorages(configs
             .stream().map(a -> {
-                WxMpDefaultConfigImpl configStorage = new WxMpDefaultConfigImpl();
+                // WxMpDefaultConfigImpl configStorage = new WxMpDefaultConfigImpl();
+                WxMpDefaultConfigImpl configStorage = new WxMpRedisConfigImpl(new JedisWxRedisOps(new JedisPool("redisServer")),
+                    a.getAppId());
                 configStorage.setAppId(a.getAppId());
                 configStorage.setSecret(a.getSecret());
                 configStorage.setToken(a.getToken());
