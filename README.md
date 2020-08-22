@@ -43,15 +43,20 @@
 ```
 wx:
   mp:
+    useRedis: false
+    redisConfig:
+      host: 127.0.0.1
+      port: 6379
     configs:
-      - appId: 1111 （一个公众号的appid）
-        secret: 1111（公众号的appsecret）
-        token: 111 （接口配置里的Token值）
-        aesKey: 111 （接口配置里的EncodingAESKey值）
-      - appId: 2222 （另一个公众号的appid，以下同上）
+      - appId: 1111 # 第一个公众号的appid
+        secret: 1111 # 公众号的appsecret
+        token: 111 # 接口配置里的Token值
+        aesKey: 111 # 接口配置里的EncodingAESKey值
+      - appId: 2222 # 第二个公众号的appid，以下同上
         secret: 1111
         token: 111
         aesKey: 111
+
 ```
 3. 运行Java程序：`WxMpDemoApplication`；
 4. 配置微信公众号中的接口地址：http://公网可访问域名/wx/portal/xxxxx （注意，xxxxx为对应公众号的appid值）；
