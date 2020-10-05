@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/error")
 public class ErrorController {
 
-  @GetMapping(value = "/404")
-  public String error404() {
-    return "error";
-  }
+    @GetMapping(value = "/404")
+    public String error404() {
+        return "error";
+    }
 
-  @GetMapping(value = "/500")
-  public String error500() {
-    return "error";
-  }
+    @GetMapping(value = "/500")
+    public String error500() {
+        return "error";
+    }
 
 }

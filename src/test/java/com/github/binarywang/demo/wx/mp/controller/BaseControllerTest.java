@@ -14,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @date 2019-06-14
  */
 public abstract class BaseControllerTest {
-	private static final String ROOT_URL = "http://127.0.0.1:8080/";
+    private static final String ROOT_URL = "http://127.0.0.1:8080/";
 
-	@BeforeTest
-	public void setup() {
-		RestAssured.baseURI = ROOT_URL;
-	}
+    @BeforeTest
+    public void setup() {
+        RestAssured.baseURI = ROOT_URL;
+    }
 
 }
