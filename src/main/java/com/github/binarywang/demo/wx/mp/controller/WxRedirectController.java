@@ -1,9 +1,10 @@
 package com.github.binarywang.demo.wx.mp.controller;
 
 import lombok.AllArgsConstructor;
+import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
+import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,8 +28,8 @@ public class WxRedirectController {
         }
 
         try {
-            WxMpOAuth2AccessToken accessToken = wxService.getOAuth2Service().getAccessToken(code);
-            WxMpUser user = wxService.getOAuth2Service().getUserInfo(accessToken, null);
+            WxOAuth2AccessToken accessToken = wxService.getOAuth2Service().getAccessToken(code);
+            WxOAuth2UserInfo user = wxService.getOAuth2Service().getUserInfo(accessToken, null);
             map.put("user", user);
         } catch (WxErrorException e) {
             e.printStackTrace();
