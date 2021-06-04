@@ -35,6 +35,11 @@ public class WxMpProperties {
          * redis服务器 端口号
          */
         private Integer port;
+
+        /**
+         * redis服务器 密码
+         */
+        private String password;
     }
 
     /**

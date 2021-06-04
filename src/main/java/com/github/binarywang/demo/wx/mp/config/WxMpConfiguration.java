@@ -12,6 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,7 +60,9 @@ public class WxMpConfiguration {
                 WxMpDefaultConfigImpl configStorage;
                 if (this.properties.isUseRedis()) {
                     final WxMpProperties.RedisConfig redisConfig = this.properties.getRedisConfig();
-                    JedisPool jedisPool = new JedisPool(redisConfig.getHost(), redisConfig.getPort());
+                    JedisPoolConfig poolConfig = new JedisPoolConfig();
+                    JedisPool jedisPool = new JedisPool(poolConfig, redisConfig.getHost(), redisConfig.getPort(),
+                       -1, redisConfig.getPassword());
                     configStorage = new WxMpRedisConfigImpl(new JedisWxRedisOps(jedisPool), a.getAppId());
                 } else {
                     configStorage = new WxMpDefaultConfigImpl();
