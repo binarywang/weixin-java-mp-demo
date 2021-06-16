@@ -62,7 +62,7 @@ public class WxMpConfiguration {
                     final WxMpProperties.RedisConfig redisConfig = this.properties.getRedisConfig();
                     JedisPoolConfig poolConfig = new JedisPoolConfig();
                     JedisPool jedisPool = new JedisPool(poolConfig, redisConfig.getHost(), redisConfig.getPort(),
-                       -1, redisConfig.getPassword());
+                       2000, redisConfig.getPassword());
                     configStorage = new WxMpRedisConfigImpl(new JedisWxRedisOps(jedisPool), a.getAppId());
                 } else {
                     configStorage = new WxMpDefaultConfigImpl();
