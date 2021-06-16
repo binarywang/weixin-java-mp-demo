@@ -40,6 +40,11 @@ public class WxMpProperties {
          * redis服务器 密码
          */
         private String password;
+
+        /**
+         * redis 服务连接超时时间
+         */
+        private Integer timeout;
     }
 
     /**

@@ -37,6 +37,7 @@ wx:
     redisConfig:
       host: 127.0.0.1
       port: 6379
+      timeout: 2000
     configs:
       - appId: 1111 # 第一个公众号的appid
         secret: 1111 # 公众号的appsecret
