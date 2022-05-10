@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author Binary Wang(https://github.com/binarywang)
+ * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
 @SpringBootApplication
 public class WxMpDemoApplication {

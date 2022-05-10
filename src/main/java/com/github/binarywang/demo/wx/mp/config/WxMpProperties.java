@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * wechat mp properties
  *
- * @author Binary Wang(https://github.com/binarywang)
+ * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
 @Data
 @ConfigurationProperties(prefix = "wx.mp")
